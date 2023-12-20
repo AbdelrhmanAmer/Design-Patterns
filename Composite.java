@@ -25,18 +25,25 @@ class Department implements Component{
     public List<Component> getChildren(){return children;}
 
     public void view() {
-        System.out.println("Department: \n" + getName());
+        System.out.println("Department: " + getName());
         viewHelper(this, 1);
     }
 
     private void viewHelper(Component component, int depth) {
+        // Indent based on depth
+        for (int i = 0; i < depth; i++) {
+            System.out.print("  ");
+        }
+
+        // Print the name of the current component
+        System.out.println(component.getName());
+
         if (component instanceof Department) {
             List<Component> children = ((Department) component).getChildren();
             for (Component child : children) {
+                // Recursive call for each child
                 viewHelper(child, depth + 1);
             }
-        } else {
-            System.out.println("Employee: " + component.getName());
         }
     }
 }
